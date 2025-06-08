@@ -1,0 +1,129 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ホーム | サイト名（仮）</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- サイト全体を包むコンテナ -->
+  <div class="container">
+    <!-- ヘッダー（サイト名＋ナビゲーション） -->
+    <header class="site-header">
+      <h1 class="site-title">
+        サイト名（仮）<!-- TODO: ロゴ画像に差し替え -->
+      </h1>
+      <nav class="site-nav">
+        <ul class="nav-list">
+          <li><a href="index.html">ホーム</a></li>
+          <li><a href="blog.html">ブログ<!-- TODO: リンク先差し替え --></a></li>
+          <li><a href="jokes.html">ネタ<!-- TODO: リンク先差し替え --></a></li>
+          <li><a href="comics.html">マンガ<!-- TODO: リンク先差し替え --></a></li>
+          <li><a href="memo.html">メモ<!-- TODO: リンク先差し替え --></a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- メインコンテンツ -->
+    <main class="main-content">
+      <!-- ヒーローセクション -->
+      <section class="hero">
+        <img src="https://placehold.co/1200x500?text=Top+Image"
+             alt="トップ画像"
+             class="hero-image"><!-- TODO: 画像差し替え -->
+      </section>
+
+      <!-- 出演予定のライブセクション -->
+      <section id="live-schedule" class="live-section">
+        <h2 class="section-title">出演予定のライブ</h2>
+        <!-- JSON 読み込み後にここへ<ul>が生成される -->
+        <div class="live-box">
+          <ul id="live-list" class="live-list">
+            <!-- JS で動的に <li> を追加 -->
+          </ul>
+        </div>
+      </section>
+
+      <!-- ソーシャルリンクセクション -->
+      <section class="social-links">
+        <h2 class="visually-hidden">ソーシャルリンク</h2><!-- アクセシビリティ用 -->
+        <ul class="social-list">
+          <li>
+            <a href="https://x.com/camelclutch_6?s=21" target="_blank" rel="noopener noreferrer">
+              X
+            </a>
+          </li>
+          <li>
+            <a href="https://youtube.com/channel/UCXtFnYqLtoMEdMeA4aG-32Q?feature=shared" target="_blank" rel="noopener noreferrer">
+              YouTube
+            </a>
+          </li>
+          <li>
+            <a href="https://note.com/tsukiha_higashi" target="_blank" rel="noopener noreferrer">
+              Note
+            </a>
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <!-- フッター -->
+    <footer class="site-footer">
+      <small>© 2025 サイト名（仮）</small>
+    </footer>
+  </div>
+
+  <!-- ■ここから JavaScript (JSON 取得＋動的リスト生成) ■ -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const liveListEl = document.getElementById("live-list");
+
+      fetch("live.json")
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("live.json の取得に失敗しました");
+          }
+          return response.json();
+        })
+        .then(data => {
+          if (!Array.isArray(data)) {
+            throw new Error("live.json のフォーマットが正しくありません");
+          }
+
+          data.forEach(item => {
+            const li = document.createElement("li");
+            li.classList.add("live-item");
+
+            // 日付＋タイトルをテキストとして先に追加
+            const textSpan = document.createElement("span");
+            textSpan.textContent = `${item.date} ${item.title}`;
+            li.appendChild(textSpan);
+
+            // URL が存在する場合は、ボタンを追加
+            if (item.url && item.url.trim() !== "") {
+              const btn = document.createElement("a");
+              btn.classList.add("live-btn");
+              btn.href = item.url;
+              btn.target = "_blank";
+              btn.rel = "noopener noreferrer";
+              btn.textContent = "詳細"; // ボタンテキストは「詳細」としています
+              li.appendChild(btn);
+            }
+
+            liveListEl.appendChild(li);
+          });
+        })
+        .catch(error => {
+          console.error(error);
+          const errorLi = document.createElement("li");
+          errorLi.classList.add("live-item");
+          errorLi.textContent = "ライブ情報を読み込めませんでした";
+          liveListEl.appendChild(errorLi);
+        });
+    });
+  </script>
+  <!-- ■ここまで JavaScript ■ -->
+</body>
+</html>

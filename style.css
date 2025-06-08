@@ -1,0 +1,133 @@
+/* style.css */
+
+/* --- リセット／ベーシック設定 --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  line-height: 1.5;
+  background-color: #fff;
+  color: #000;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* --- コンテナ中央寄せ --- */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* --- ヘッダー --- */
+.site-header {
+  background-color: #f0f0f0;
+  padding: 1rem 0;
+}
+
+.site-title {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  /* TODO: ロゴフォントやスタイル調整 */
+}
+
+.site-nav .nav-list {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+}
+
+.site-nav .nav-list li a {
+  font-size: 1rem;
+  /* TODO: ホバー時のスタイル調整 */
+}
+
+/* --- ヒーロー画像 --- */
+.hero {
+  margin-top: 1rem;
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  /* TODO: 画質最適化や alt テキスト充実 */
+}
+
+/* --- 出演予定のライブセクション --- */
+.live-section {
+  margin-top: 2rem;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+/* ライブ予定を囲むボックス */
+.live-box {
+  border: 1px solid #000;
+  padding: 1rem;
+  background-color: #fafafa;
+}
+
+/* ライブリスト */
+.live-list {
+  list-style: none;
+}
+
+/* ライブ項目1行 */
+.live-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* テキストとボタンの間隔を空ける */
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* ライブ詳細ボタン */
+.live-btn {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid #000;
+  border-radius: 4px;
+  background-color: #fff;
+  font-size: 0.875rem;
+  text-align: center;
+  /* TODO: ホバー時の色変化などを追加可能 */
+}
+
+/* --- ソーシャルリンク --- */
+.social-links {
+  margin-top: 2rem;
+}
+
+.social-list {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+}
+
+.social-list li a {
+  font-size: 1rem;
+  /* TODO: アイコン画像に変更 */
+}
+
+/* --- フッター --- */
+.site-footer {
+  margin-top: 2rem;
+  padding: 1rem 0;
+  text-align: center;
+  background-color: #f0f0f0;
+  font-size: 0.875rem;
+}
+
+/* --- レスポンシブ（必要に応じて追加） --- */
+/* ※ モバイルファーストなので、必要に応じて media query を追加 */
